@@ -197,11 +197,20 @@
     function scrollToHeader(el) {
         event.preventDefault();
         const target = document.querySelector(`#${normalizeTitle(el.textContent)}`);
+        const hamburger = document.querySelector('#hamburger');
+        const toc = document.querySelector('#toc');
+
         if (target) {
             const parent = target.parentElement.parentElement;
             // 滚动效果已经设置scroll-behavior: smooth
             container.scrollTo({ left: 0, top: parent.offsetTop + 2 });
         }
+
+        if (getComputedStyle(toc).position === 'fixed') {
+            hamburger.classList.toggle('transformed', false);
+            toc.style.display = 'none';
+        }
+
     }
 
     /******************
