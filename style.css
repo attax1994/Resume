@@ -72,6 +72,7 @@ nav {
 }
 
 .label {
+    font-weight: bold;
     display: inline-block;
     width: 7rem;
 }
