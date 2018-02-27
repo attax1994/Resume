@@ -59,8 +59,8 @@
             const isShadow = Boolean(target.querySelector('.shadow'));
             const rootBoundsInfo = container.getBoundingClientRect();
 
-            const headerTop = targetInfo.y + 10,
-                headerBottom = targetInfo.y + targetInfo.height - stickyTarget.getBoundingClientRect().height - 10;
+            const headerTop = targetInfo.top + 10,
+                headerBottom = targetInfo.bottom - stickyTarget.getBoundingClientRect().height - 10;
 
             if (headerTop < rootBoundsInfo.top && headerBottom > rootBoundsInfo.top) {
                 fire(true, stickyTarget);
@@ -95,6 +95,20 @@
         }
     }
 
+
+    function adjustStickyTarget() {
+        const target = document.querySelector('.shadow');
+        if (target) {
+            const parentInfo = target.parentElement.getBoundingClientRect();
+            // 将nav的高度和container的padding算入
+            const top = 70 - parentInfo.top,
+                bottom = parentInfo.bottom - target.getBoundingClientRect().height - 80;
+            let position = top > 10 ? top : 10;
+            if (bottom > 0) {
+                target.style.top = `${position}px`;
+            }
+        }
+    }
 
     /**
      * 将空白符（空格，制表符，换行符等）和感叹号，替换为'-'
@@ -148,6 +162,7 @@
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
     container.addEventListener('scroll', () => {
+        adjustStickyTarget();
         if (!throttler) {
             ckeckStickyHeadersChange(container);
             throttler = setTimeout(() => {
