@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Accessibility Testing Result</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="../lib/knockout-min.js"></script>
+  <script src="./report.js"></script>
+  <script src="../js/fetch.js"></script>
+</head>
+
+<body>
+<div class="page-wrapper">
+  <div class="menu-wrapper">
+    <div>
+      <ul class="menu">
+        <li>
+          <span class="menu-title"
+                data-bind="click: window.switchType.bind($data,'violations',-1), style: { color: viewModel.typeIndex()===-1&&viewModel.currentType()==='violations'? 'blue':'black'}">Violations: </span>
+          <span style="float:right"></span>
+          <ul data-bind="foreach: source().violations">
+            <li>
+              <a class="menu-link"
+                 data-bind="click: window.switchType.bind($data,'violations',$index()), style: { color: viewModel.typeIndex()===$index()&&viewModel.currentType()==='violations'? 'blue': 'black'}">
+                <span data-bind="text:id"></span>
+              </a>
+              <span style="float:right" data-bind="text:value.length"></span>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <span class="menu-title"
+                data-bind="click: window.switchType.bind($data,'incomplete',-1), style: { color: viewModel.typeIndex()===-1&&viewModel.currentType()==='incomplete'? 'blue':'black'}">Incomplete(Needs review): </span>
+          <span style="float:right"></span>
+          <ul data-bind="foreach: source().incomplete">
+            <li>
+              <a class="menu-link"
+                 data-bind="click: window.switchType.bind($data,'incomplete',$index()), style: { color: viewModel.typeIndex()===$index()&&viewModel.currentType()==='incomplete'? 'blue': 'black'}">
+                <span data-bind="text:id"></span>
+              </a>
+              <span style="float:right" data-bind="text:value.length"></span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-card-wrapper">
+    <h1>Accessibility Testing Result</h1>
+    <div class="file-wrapper">
+      <h3>
+        <span>Url:&nbsp;</span>
+        <span>
+            <a target="_blank" data-bind="attr:{href:url},text:url"></a>
+          </span>
+      </h3>
+      <div data-bind="foreach: results">
+        <div style="margin-bottom: 4em;">
+          <h3>
+            <span>Description:&nbsp;</span>
+            <span data-bind="text: value[0].violationType"></span>
+          </h3>
+
+          <div class="table-wrapper" data-bind="foreach: value">
+
+            <div class="table-body">
+              <div class="table-row">
+                <div class="item-title">Impact</div>
+                <div class="item-content short-content"
+                     data-bind="text:impact,css: { serious: impact==='serious', critical: impact==='critical'}"></div>
+                <div class="item-title">Help</div>
+                <div class="item-content short-content">
+                  <a target="_blank" data-bind="attr:{href:helpUrl}">Get Help</a>
+                </div>
+                <div class="item-title">DOM Element</div>
+                <div class="item-content" data-bind="text:DOMElement"></div>
+                <div class="item-title">Xpath</div>
+                <div class="item-content" data-bind="text:Xpath"></div>
+              </div>
+
+              <div class="table-row">
+                <div class="item-title">Message</div>
+                <div class="item-content long-content" data-bind="foreach:message">
+                  <div data-bind="text: $data" style="margin-bottom: 0.25em;width: 100%;"></div>
+                </div>
+              </div>
+
+              <div class="table-row">
+                <div class="item-title">HTML Element</div>
+                <div class="item-content long-content" data-bind="text:HTML"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
