@@ -33,8 +33,8 @@
         const MSGS = [
             '个人简介',
             '实习经历',
-            '教育经历',
             '项目经历',
+            '教育经历',
             '其他',
             '简历说明',
         ];
@@ -203,7 +203,8 @@
         if (target) {
             const parent = target.parentElement.parentElement;
             // 滚动效果已经设置scroll-behavior: smooth
-            container.scrollTo({ left: 0, top: parent.offsetTop + 2 });
+            container.scrollTop = parent.offsetTop + 2;
+            /* container.scrollTo({ left: 0, top: parent.offsetTop + 2 }); */
         }
 
         if (getComputedStyle(toc).position === 'fixed') {

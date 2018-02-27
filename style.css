@@ -11,7 +11,7 @@ nav {
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(180deg, #252525, #0a0a0a);
+    background: linear-gradient(0deg, #3A5E8C, #132b57);
     padding: 10px 0;
     z-index: 10;
 }
@@ -74,10 +74,13 @@ nav {
 .label {
     font-weight: bold;
     display: inline-block;
+    vertical-align: top;
     width: 7rem;
 }
 
 .content {
+    display: inline-block;
+    width: calc(99% - 7rem);
     padding-right: 1rem;
 }
 
@@ -95,6 +98,9 @@ nav {
         display: block;
     }
     .label {
+        width: 100%;
+    }
+    .content {
         width: 100%;
     }
 }
