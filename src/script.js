@@ -20,7 +20,7 @@
         } else {
             const offset = container.getBoundingClientRect().right;
             toc.style.display = 'block';
-            toc.style.left = `${offset}px`;
+            toc.style.left = offset + 'px';
         }
     }
 

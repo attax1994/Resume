@@ -22,7 +22,7 @@
         const t2 = toc.querySelector('template');
 
         // msg即currentValue，i即index
-        MSGS.forEach((msg, i) => {
+        MSGS.forEach(function (msg, i) {
             const h2 = container.querySelectorAll('h2')[i];
             if (h2) {
                 // 更改sticky框的标题
@@ -38,7 +38,7 @@
             // 设置anchor的文本标题
             a.textContent = msg;
             // 设置anchor的链接地址（替换掉一些符号）
-            a.href = `#${normalizeTitle(msg)}`;
+            a.href = '#' + normalizeTitle(msg);
             // 插入到侧边菜单的父容器中去
             toc.appendChild(tocClone);
         });
@@ -83,7 +83,7 @@
 
         // 更新侧边栏展开的栏目
         if (stuck) {
-            allTocsItems.map(el => {
+            allTocsItems.map(function (el) {
                 const match = (el.firstElementChild.getAttribute('href').slice(1) ===
                     target.firstElementChild.id);
                 el.classList.toggle('active', match);
@@ -91,21 +91,24 @@
         }
     }
 
-
+    /** 
+     * 调整现有的sticky框位置
+    */
     function adjustStickyTarget() {
         const target = document.querySelector('.shadow');
         if (target) {
             const parent = target.parentElement,
+                parentInfo = parent.getBoundingClientRect(),
                 paddingTop = Number.parseInt(getComputedStyle(parent)['padding-top'].replace('px', '')),
                 paddingBottom = Number.parseInt(getComputedStyle(parent)['padding-bottom'].replace('px', '')),
-                padding = paddingTop + paddingBottom,
-                parentInfo = parent.getBoundingClientRect();
+                padding = paddingTop + paddingBottom;
             // 将nav的高度和container的padding算入
             const top = paddingTop - parentInfo.top,
                 bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding;
+
             let position = top > 10 ? top : 10;
             if (bottom > 0) {
-                target.style.top = `${position}px`;
+                target.style.top = position + 'px';
             }
         }
     }
@@ -121,7 +124,7 @@
 
     function scrollToHeader(el, event) {
         event.preventDefault();
-        const target = document.querySelector(`#${normalizeTitle(el.textContent)}`);
+        const target = document.querySelector('#' + normalizeTitle(el.textContent));
 
         if (target) {
             const parent = target.parentElement.parentElement;
@@ -159,7 +162,7 @@
 
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function () {
         adjustStickyTarget();
         ckeckStickyChange(container);
 
