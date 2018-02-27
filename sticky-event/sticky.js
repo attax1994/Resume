@@ -1,7 +1,6 @@
 ; (function () {
     'use strict';
 
-
     /**
      * 初始化页面
      * @param {!Element} container
@@ -47,27 +46,24 @@
 
 
     /**
-     * 设置IntersectionObserver，从而确认文章容器顶部
-     * class为`.section_sentinel--top`的元素是否可视
      * @param {!Element} container #container容器
      */
-    function ckeckStickyHeadersChange(container) {
+    function ckeckStickyChange(container) {
         const targets = Array.from(container.children);
+        const top = document.querySelector('nav').getBoundingClientRect().height;
         for (let target of targets) {
-            const targetInfo = target.getBoundingClientRect();
-            const stickyTarget = target.querySelector('.sticky');
-            const isShadow = Boolean(target.querySelector('.shadow'));
-            const rootBoundsInfo = container.getBoundingClientRect();
+            const targetInfo = target.getBoundingClientRect(),
+                stickyTarget = target.querySelector('.sticky'),
+                isShadow = Boolean(target.querySelector('.shadow'));
+            const targetTop = targetInfo.top,
+                targetBottom = targetInfo.bottom - stickyTarget.getBoundingClientRect().height;
 
-            const headerTop = targetInfo.top + 10,
-                headerBottom = targetInfo.bottom - stickyTarget.getBoundingClientRect().height - 10;
-
-            if (headerTop < rootBoundsInfo.top && headerBottom > rootBoundsInfo.top) {
+            if (targetTop < top && targetBottom > top) {
                 fire(true, stickyTarget);
                 continue;
             }
 
-            if ((headerTop >= rootBoundsInfo.top || headerBottom <= rootBoundsInfo.top) && isShadow) {
+            if ((targetTop >= top || targetBottom <= top) && isShadow) {
                 fire(false, stickyTarget);
                 continue;
             }
@@ -99,10 +95,14 @@
     function adjustStickyTarget() {
         const target = document.querySelector('.shadow');
         if (target) {
-            const parentInfo = target.parentElement.getBoundingClientRect();
+            const parent = target.parentElement,
+                paddingTop = Number.parseInt(getComputedStyle(parent)['padding-top'].replace('px', '')),
+                paddingBottom = Number.parseInt(getComputedStyle(parent)['padding-bottom'].replace('px', '')),
+                padding = paddingTop + paddingBottom,
+                parentInfo = parent.getBoundingClientRect();
             // 将nav的高度和container的padding算入
-            const top = 70 - parentInfo.top,
-                bottom = parentInfo.bottom - target.getBoundingClientRect().height - 80;
+            const top = paddingTop - parentInfo.top,
+                bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding;
             let position = top > 10 ? top : 10;
             if (bottom > 0) {
                 target.style.top = `${position}px`;
@@ -119,19 +119,16 @@
     }
 
 
-    function scrollToHeader(el) {
+    function scrollToHeader(el, event) {
         event.preventDefault();
         const target = document.querySelector(`#${normalizeTitle(el.textContent)}`);
-        const hamburger = document.querySelector('#hamburger');
-        const toc = document.querySelector('#toc');
 
         if (target) {
             const parent = target.parentElement.parentElement;
-            // 滚动效果已经设置scroll-behavior: smooth
-            container.scrollTop = parent.offsetTop + 12;
+            window.scrollTo({ top: parent.offsetTop + 2, left: 0, behavior: 'smooth' });
         }
 
-        if (getComputedStyle(toc).position === 'fixed') {
+        if (getComputedStyle(toc).left === '0px') {
             hamburger.classList.toggle('transformed', false);
             toc.style.display = 'none';
         }
@@ -144,31 +141,34 @@
     /**
      * 1. 初始化页面
      */
-    const container = document.querySelector('#container');
+    const container = document.querySelector('#container'),
+        hamburger = document.querySelector('#hamburger'),
+        toc = document.querySelector('#toc');
     generatePage(container);
+    // 所有的侧边栏菜单项目
+    const allTocsItems = Array.from(toc.querySelectorAll('.toc-item'));
 
     /**
      * 2. 初次检测
      */
-    ckeckStickyHeadersChange(container);
+    ckeckStickyChange(container);
 
     /**
      * 3. 注册事件监听器
      */
-    // 所有的侧边栏菜单项目
-    const allTocsItems = Array.from(document.querySelectorAll('#toc .toc-item'));
 
-    // 由container监听滚动事件
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
-    container.addEventListener('scroll', () => {
+    window.addEventListener('scroll', () => {
         adjustStickyTarget();
-        if (!throttler) {
-            ckeckStickyHeadersChange(container);
+        ckeckStickyChange(container);
+
+        /* if (!throttler) {
+
             throttler = setTimeout(() => {
                 throttler = null;
-            }, 16);
-        }
+            }, 4);
+        } */
     });
 
     window.scrollToHeader = scrollToHeader;

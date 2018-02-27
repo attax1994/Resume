@@ -1,6 +1,7 @@
 ; (function () {
-    const hamburger = document.querySelector('#hamburger');
-    const toc = document.querySelector('#toc');
+    const hamburger = document.querySelector('#hamburger'),
+        container = document.querySelector('#container'),
+        toc = document.querySelector('#toc');
 
     const toggleTable = function () {
         if (hamburger.classList.contains('transformed')) {
@@ -13,11 +14,13 @@
     }
 
     const checkScreen = function () {
-        if (getComputedStyle(toc).position === 'fixed') {
+        if (getComputedStyle(toc).left === '0px') {
             hamburger.classList.toggle('transformed', false);
             toc.style.display = 'none';
         } else {
+            const offset = container.getBoundingClientRect().right;
             toc.style.display = 'block';
+            toc.style.left = `${offset}px`;
         }
     }
 

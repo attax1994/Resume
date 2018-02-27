@@ -11,6 +11,7 @@ body {
     max-width: 1200px;
     padding: 0 16px;
     margin: 0 auto;
+    scroll-behavior: smooth;
 }
 
 a {
@@ -33,13 +34,11 @@ h2 {
 }
 
 #container {
-    overflow: auto;
     will-change: transform;
     /* make overflow fast on non-retina */
-    width: 66%;
+    width: 80%;
     padding: 16px;
     background-color: #ECEFF1;
-    scroll-behavior: smooth;
 }
 
 .sticky {
@@ -73,18 +72,16 @@ h2 {
 }
 
 main {
-    display: flex;
-    height: 100vh;
     padding-top: 60px;
 }
 
 #toc {
-    --indent: 8px;
-    width: 33%;
+    position: fixed;
+    top: 60px;
+    left: 50%;
     background: #fff;
     border: 1px solid #ECEFF1;
-    padding: 16px calc(16px + var(--indent));
-    overflow: auto;
+    padding: 16px 24px;
     font-size: 14px;
 }
 
@@ -146,7 +143,7 @@ header {
     #toc {
         position: fixed;
         top: 60px;
-        left: 0;
+        left: 0 !important;
         right: 0;
         width: auto;
     }
