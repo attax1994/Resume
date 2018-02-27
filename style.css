@@ -80,8 +80,7 @@ nav {
 
 .content {
     display: inline-block;
-    width: calc(99% - 7rem);
-    padding-right: 1rem;
+    width: calc(95% - 7rem);
 }
 
 .list {
