@@ -20,7 +20,6 @@
         const toc = document.querySelector('#toc > ul');
         // t2是#toc下的template
         const t2 = toc.querySelector('template');
-
         // msg即currentValue，i即index
         MSGS.forEach(function (msg, i) {
             const h2 = container.querySelectorAll('h2')[i];
@@ -50,6 +49,7 @@
      */
     function ckeckStickyChange(container) {
         const targets = Array.from(container.children);
+        /* const targets = [].slice.call(container.children); */
         const top = document.querySelector('nav').getBoundingClientRect().height;
         for (let target of targets) {
             const targetInfo = target.getBoundingClientRect(),
@@ -167,10 +167,10 @@
         ckeckStickyChange(container);
 
         /* if (!throttler) {
-
+        
             throttler = setTimeout(() => {
                 throttler = null;
-            }, 4);
+            }, 10);
         } */
     });
 
