@@ -34,7 +34,6 @@ h2 {
 }
 
 #container {
-    will-change: transform;
     /* make overflow fast on non-retina */
     width: 80%;
     padding: 16px;

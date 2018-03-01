@@ -1,10 +1,10 @@
 HTML Resume Template
 --------------------
 
-A simple HTML resume template, well displayed on smart phones and PC under various resolutions.
+A Resume template by attax1994, applying sticky effect and event for most browsers.
 
 ### Todo List:
 1. Scroll smoothing in Edge/IE.
 2. IE support for \<template\> tag, Array.from method.
-
+3. Progressive image loading for images.
 
