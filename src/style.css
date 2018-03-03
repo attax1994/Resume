@@ -93,6 +93,7 @@ nav {
 
 .content {
     display: inline-block;
+    max-width: calc(95% - 7rem);
 }
 
 .list {
