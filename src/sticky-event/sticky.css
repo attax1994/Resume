@@ -45,6 +45,7 @@ h2 {
     top: 10px;
     left: 10px;
     right: 10px;
+    z-index: 1;
     /* Sentinels adjust based on this position. */
     height: 60px;
     background: #3A5E8C;

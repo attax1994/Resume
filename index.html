@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="src/sticky-event/sticky.css" />
     <link rel="stylesheet" href="src/progress-bar/progress-bar.css">
     <link rel="stylesheet" href="src/style.css" />
-    
+
 </head>
 
 <body class="nojs">
@@ -31,6 +31,8 @@
 
     <main>
         <div id="container">
+
+            <!-- 基本信息 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -81,6 +83,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 实习经历 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -93,7 +97,7 @@
                         </div>
                         <div>
                             <span class="label">职务：</span>
-                            <span class="content">软件开发实习生（OATS）</span>
+                            <span class="content">Web开发实习生（OATS）</span>
                         </div>
                         <div>
                             <span class="label">公司名称：</span>
@@ -120,6 +124,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 项目经历 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -141,6 +147,10 @@
                         <div>
                             <span class="label">类型：</span>
                             <span class="content">Web/移动端（响应式页面）开发</span>
+                        </div>
+                        <div>
+                            <span class="label">个人角色：</span>
+                            <span class="content">唯一的前端</span>
                         </div>
                         <div>
                             <span class="label">项目简述：</span>
@@ -179,6 +189,10 @@
                             <span class="content">微信小程序</span>
                         </div>
                         <div>
+                            <span class="label">个人角色：</span>
+                            <span class="content">唯一的前端</span>
+                        </div>
+                        <div>
                             <span class="label">项目简述：</span>
                             <span class="content">
                                 慢友100的目标客户为药店员工，辅助其对购药患者提供身体状况的跟踪调查服务。
@@ -193,6 +207,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 教育经历 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -221,6 +237,7 @@
                 </div>
             </div>
 
+            <!-- 个人技能 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -272,6 +289,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 页面说明 -->
             <div class="subject" data-lorem="p">
                 <div class="sticky">
                     <h2 id=""></h2>
@@ -279,22 +298,27 @@
                 <div class="section-body">
                     <div class="separate">
                         <div>
-                            <span class="label">2016--至今</span>
-                            <span class="content">学历：硕士</span>
+                            <span class="label">关于标题：</span>
+                            <span class="content">标题的粘滞效果本来是准备使用position: sticky的，最初的构想来自于
+                                <a class="link" target="_blank" href="https://github.com/ebidel/demos/blob/master/sticky-position-event.html">
+                                    sticky-event
+                                </a>，但是在此基础上修复了多个div同时active的bug。
+                                而后考虑到在旧版浏览器中的兼容性，还是采用了scroll事件来监听每一个div是否进入粘滞区。
+                                值得注意的是，当标题处于上方粘滞的时候，右侧菜单也会随之更新。
+                            </span>
                         </div>
-                        <div>南京邮电大学 / 通信与信息工程学院 / 信号与信息处理</div>
                     </div>
                     <div class="separate">
                         <div>
-                            <span class="label">2012--2016</span>
-                            <span class="content">学历：本科</span>
+                            <span class="label">技能进度条：</span>
+                            <span class="content">用一个scroll事件去探测该区块的底部是否高于页面的底部，满足条件后触发效果，并且将该事件移除。</span>
                         </div>
-                        <div>南京邮电大学 / 通信与信息工程学院 / 通信工程</div>
                     </div>
-
                 </div>
             </div>
+
         </div>
+
         <aside id="toc">
             <h3 class="toc-title">简历菜单</h3>
             <ul>
