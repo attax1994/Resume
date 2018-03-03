@@ -55,7 +55,6 @@ h2 {
 
 .subject {
     margin-bottom: calc(16px * 2);
-    text-align: justify;
     padding: 70px 16px 16px;
     position: relative;
     /* contain the sentinels */

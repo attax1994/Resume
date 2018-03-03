@@ -1,4 +1,5 @@
-; (function () {
+;
+(function () {
     const hamburger = document.querySelector('#hamburger'),
         container = document.querySelector('#container'),
         toc = document.querySelector('#toc');
@@ -25,6 +26,6 @@
     }
 
     checkScreen();
-    window.addEventListener('resize', checkScreen);
+    window.addEventListener('resize', checkScreen, false);
     window.toggleTable = toggleTable;
 })();

@@ -22,6 +22,19 @@ nav {
     color: white;
 }
 
+#github {
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+}
+
+#github a {
+    display: block;
+    height: 100%;
+    background: url('./img/github.png') center center / 100% 100% no-repeat;
+    background-size: 100% 100%;
+}
+
 #hamburger {
     display: none;
     margin-left: auto;
@@ -80,7 +93,6 @@ nav {
 
 .content {
     display: inline-block;
-    width: calc(95% - 7rem);
 }
 
 .list {
@@ -93,6 +105,9 @@ nav {
 }
 
 @media (max-width: 768px) {
+    #github {
+        display: none;
+    }
     #hamburger {
         display: block;
     }

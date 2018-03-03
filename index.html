@@ -8,21 +8,25 @@
     <title>李奇源 | 个人简历</title>
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="src/style.css" />
     <link rel="stylesheet" href="src/sticky-event/sticky.css" />
+    <link rel="stylesheet" href="src/progress-bar/progress-bar.css">
+    <link rel="stylesheet" href="src/style.css" />
+    
 </head>
 
 <body class="nojs">
     <nav>
         <div class="section nav-header">
             <div>李奇源：前端/NodeJS</div>
+            <div id="github">
+                <a target="_blank" href="https://github.com/attax1994/Resume"></a>
+            </div>
             <div id="hamburger" onclick="toggleTable()">
                 <div class="line"></div>
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
         </div>
-
     </nav>
 
     <main>
@@ -177,14 +181,13 @@
                         <div>
                             <span class="label">项目简述：</span>
                             <span class="content">
-                                慢友100是
+                                慢友100的目标客户为药店员工，辅助其对购药患者提供身体状况的跟踪调查服务。
                             </span>
                         </div>
                         <div>
                             <span class="label">个人职能：</span>
                             <span class="content">
-                                独立完成网站的门户网站与后台管理界面的前端工作，包括页面实现，性能调优，交互优化等。 
-                                同时开发一系列高复用性的组件，如底部类似于tarbar的页面切换footer菜单。
+                                独立完成网站的门户网站与后台管理界面的前端工作，包括页面实现，性能调优，交互优化等。 同时开发一系列高复用性的组件，如底部类似于tarbar的页面切换footer菜单，微信小程序体系中不存在的table标签类。
                             </span>
                         </div>
                     </div>
@@ -223,19 +226,49 @@
                     <h2 id=""></h2>
                 </div>
                 <div class="section-body">
-                    <div class="separate">
+                    <div class="separate with-progress">
                         <div>
-                            <span class="label">2016--至今</span>
-                            <span class="content">学历：硕士</span>
+                            <span class="label">JavaScript：</span>
+                            <span class="progress">
+                                <span class="level level3"></span>
+                            </span>
+                            <span class="content">熟悉</span>
                         </div>
-                        <div>南京邮电大学 / 通信与信息工程学院 / 信号与信息处理</div>
-                    </div>
-                    <div class="separate">
                         <div>
-                            <span class="label">2012--2016</span>
-                            <span class="content">学历：本科</span>
+                            <span class="label">Angular：</span>
+                            <span class="progress">
+                                <span class="level level3"></span>
+                            </span>
+                            <span class="content">熟悉</span>
                         </div>
-                        <div>南京邮电大学 / 通信与信息工程学院 / 通信工程</div>
+                        <div>
+                            <span class="label">NodeJS：</span>
+                            <span class="progress">
+                                <span class="level level2"></span>
+                            </span>
+                            <span class="content">掌握</span>
+                        </div>
+                        <div>
+                            <span class="label">Koa：</span>
+                            <span class="progress">
+                                <span class="level level2"></span>
+                            </span>
+                            <span class="content">掌握</span>
+                        </div>
+                        <div>
+                            <span class="label">Java：</span>
+                            <span class="progress">
+                                <span class="level level2"></span>
+                            </span>
+                            <span class="content">掌握</span>
+                        </div>
+                        <div>
+                            <span class="label">Spring：</span>
+                            <span class="progress">
+                                <span class="level level2"></span>
+                            </span>
+                            <span class="content">掌握</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -280,8 +313,9 @@
         </aside>
     </main>
 
-    <script src="lib/script.js"></script>
-    <script src="lib/sticky-event/sticky.js"></script>
+    <script src="src/sticky-event/sticky.js"></script>
+    <script src="src/progress-bar/progress-bar.js"></script>
+    <script src="src/script.js"></script>
 </body>
 
 </html>
