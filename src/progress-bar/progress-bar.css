@@ -35,6 +35,9 @@
 
 @media (max-width: 768px) {
     .progress {
-        width: 100%;
+        width: 60%;
+    }
+    .with-progress .content{
+        max-width: 35%;
     }
 }

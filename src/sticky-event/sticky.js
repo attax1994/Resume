@@ -1,4 +1,5 @@
-; (function () {
+;
+(function () {
     'use strict';
 
     /**
@@ -44,13 +45,13 @@
     }
 
 
+    const top = document.querySelector('nav').getBoundingClientRect().height;
     /**
      * @param {!Element} container #container容器
      */
     function ckeckStickyChange(container) {
         const targets = Array.from(container.children);
         /* const targets = [].slice.call(container.children); */
-        const top = document.querySelector('nav').getBoundingClientRect().height;
         for (let target of targets) {
             const targetInfo = target.getBoundingClientRect(),
                 stickyTarget = target.querySelector('.sticky'),
@@ -58,7 +59,7 @@
             const targetTop = targetInfo.top,
                 targetBottom = targetInfo.bottom - stickyTarget.getBoundingClientRect().height;
 
-            if (targetTop < top && targetBottom > top) {
+            if (targetTop < top && targetBottom > top && !isShadow) {
                 fire(true, stickyTarget);
                 continue;
             }
@@ -81,7 +82,7 @@
         // 切换阴影
         target.classList.toggle('shadow', stuck);
 
-        // 更新侧边栏展开的栏目
+        // 如果为切换粘滞，更新侧边栏展开的栏目
         if (stuck) {
             allTocsItems.map(function (el) {
                 const match = (el.firstElementChild.getAttribute('href').slice(1) ===
@@ -89,26 +90,37 @@
                 el.classList.toggle('active', match);
             });
         }
+        // 向上滚动至停止粘滞，回复原位
+        else {
+            const targetInfo = target.getBoundingClientRect();
+            if (targetInfo.top > top) {
+                target.style.transform = 'none';
+            }
+        }
     }
+
 
     /** 
      * 调整现有的sticky框位置
-    */
+     */
     function adjustStickyTarget() {
         const target = document.querySelector('.shadow');
         if (target) {
             const parent = target.parentElement,
                 parentInfo = parent.getBoundingClientRect(),
-                paddingTop = Number.parseInt(getComputedStyle(parent)['padding-top'].replace('px', '')),
-                paddingBottom = Number.parseInt(getComputedStyle(parent)['padding-bottom'].replace('px', '')),
+                parentStyle = getComputedStyle(parent),
+                paddingTop = Number.parseInt(parentStyle['padding-top'].replace('px', '')),
+                paddingBottom = Number.parseInt(parentStyle['padding-bottom'].replace('px', '')),
                 padding = paddingTop + paddingBottom;
             // 将nav的高度和container的padding算入
-            const top = paddingTop - parentInfo.top,
+            const top = paddingTop - parentInfo.top - 10,
                 bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding;
 
-            let position = top > 10 ? top : 10;
+            let position = top > 0 ? top : 0;
             if (bottom > 0) {
-                target.style.top = position + 'px';
+                target.style.transform = 'translate(0,' + position + 'px)';
+                // 如果不需要ie9支持，选用translate3d，开启GPU渲染
+                /* target.style.transform = 'translate3d(0,' + position + 'px, 0)'; */
             }
         }
     }
@@ -121,14 +133,22 @@
         return title.replace(/[\s!]/g, '-');
     }
 
-
+    /**
+     * Prevent default 
+     * @param {Element} el 
+     * @param {MouseEvent} event 
+     */
     function scrollToHeader(el, event) {
         event.preventDefault();
         const target = document.querySelector('#' + normalizeTitle(el.textContent));
 
         if (target) {
             const parent = target.parentElement.parentElement;
-            window.scrollTo({ top: parent.offsetTop + 2, left: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: parent.offsetTop + 2,
+                left: 0,
+                behavior: 'smooth'
+            });
         }
 
         if (getComputedStyle(toc).left === '0px') {
@@ -155,6 +175,7 @@
      * 2. 初次检测
      */
     ckeckStickyChange(container);
+    adjustStickyTarget();
 
     /**
      * 3. 注册事件监听器
@@ -163,8 +184,8 @@
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
     window.addEventListener('scroll', function () {
-        adjustStickyTarget();
         ckeckStickyChange(container);
+        adjustStickyTarget();
 
         /* if (!throttler) {
         

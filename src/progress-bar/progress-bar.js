@@ -1,11 +1,11 @@
 ;
 (function () {
   const progressBody = document.querySelector('.with-progress');
-  const triggerHeight = window.innerHeight - 100;
-
+  const triggerHeight = window.innerHeight;
 
   function checkProgressBody() {
     const bottom = progressBody.getBoundingClientRect().bottom;
+    
     if (bottom < triggerHeight && !progressBody.classList.contains('progress-active')) {
       progressBody.classList.add('progress-active');
       window.removeEventListener('scroll', checkProgressBody, false)
