@@ -94,7 +94,8 @@
         else {
             const targetInfo = target.getBoundingClientRect();
             if (targetInfo.top > top) {
-                target.style.transform = 'none';
+                target.style.top = '10px';
+                /* target.style.transform = 'none'; */
             }
         }
     }
@@ -113,14 +114,14 @@
                 paddingBottom = Number.parseInt(parentStyle['padding-bottom'].replace('px', '')),
                 padding = paddingTop + paddingBottom;
             // 将nav的高度和container的padding算入
-            const top = paddingTop - parentInfo.top - 10,
-                bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding;
+            const top = paddingTop - parentInfo.top,
+                bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding,
+                position = top > 10 ? top : 10;
 
-            let position = top > 0 ? top : 0;
             if (bottom > 0) {
-                target.style.transform = 'translate(0,' + position + 'px)';
+                target.style.top = position + 'px';
                 // 如果不需要ie9支持，选用translate3d，开启GPU渲染
-                /* target.style.transform = 'translate3d(0,' + position + 'px, 0)'; */
+                /* target.style.transform = 'translate3d(0,' + (position - 10) + 'px, 0)'; */
             }
         }
     }
