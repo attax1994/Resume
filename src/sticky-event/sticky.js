@@ -141,17 +141,19 @@
      */
     function scrollToHeader(el, event) {
         event.preventDefault();
-        const target = document.querySelector('#' + normalizeTitle(el.textContent));
+        const header = document.querySelector('#' + normalizeTitle(el.textContent));
 
-        if (target) {
-            const parent = target.parentElement.parentElement;
+        if (header) {
+            const parent = header.parentElement.parentElement;
             window.scrollTo({
-                top: parent.offsetTop + 2,
+                // 记得减去paddingTop，然后预留几个px来触发
+                top: parent.offsetTop - 48,
                 left: 0,
                 behavior: 'smooth'
             });
         }
 
+        // 移动端模式下关闭菜单
         if (getComputedStyle(toc).left === '0px') {
             hamburger.classList.toggle('transformed', false);
             toc.style.display = 'none';
