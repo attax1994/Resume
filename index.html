@@ -8,9 +8,10 @@
     <title>李奇源 | 个人简历</title>
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="src/sticky-event/sticky.css" />
-    <link rel="stylesheet" href="src/progress-bar/progress-bar.css">
-    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="./src/sticky-event/sticky.css" />
+    <link rel="stylesheet" href="./src/progress-bar/progress-bar.css">
+    <link rel="stylesheet" href="./src/progressive-image/progressive-image.css">
+    <link rel="stylesheet" href="./src/style.css"/>
 
 </head>
 
@@ -38,8 +39,14 @@
                     <h2 id=""></h2>
                 </div>
                 <div class="section-body">
-                    <div class="right">
-                        <img src="./photo.jpg">
+                    <div class="right" style="width: 140px;">
+                        <div class="progressive">
+                            <img class="preview" src="./src/img/photo-b.jpg" 
+                            data-height="211" 
+                            data-width="140"
+                            data-origin="./src/img/photo-b.jpg" 
+                            data-actual="./src/img/photo.jpg">
+                        </div>
                     </div>
                     <div class="item">
                         <span class="label">姓名：</span>
@@ -302,9 +309,7 @@
                             <span class="content">标题的粘滞效果本来是准备使用position: sticky的，最初的构想来自于
                                 <a class="link" target="_blank" href="https://github.com/ebidel/demos/blob/master/sticky-position-event.html">
                                     sticky-event
-                                </a>，但是在此基础上修复了多个div同时active的bug。
-                                而后考虑到在旧版浏览器中的兼容性，还是采用了scroll事件来监听每一个div是否进入粘滞区。
-                                值得注意的是，当标题处于上方粘滞的时候，右侧菜单也会随之更新。
+                                </a>，但是在此基础上修复了多个div同时active的bug。 而后考虑到在旧版浏览器中的兼容性，还是采用了scroll事件来监听每一个div是否进入粘滞区。 值得注意的是，当标题处于上方粘滞的时候，右侧菜单也会随之更新。
                             </span>
                         </div>
                     </div>
@@ -314,6 +319,16 @@
                             <span class="content">用一个scroll事件去探测该区块的底部是否高于页面的底部，满足条件后触发效果，并且将该事件移除。</span>
                         </div>
                     </div>
+                    <div class="separate">
+                            <div>
+                                <span class="label">图片懒加载：</span>
+                                <span class="content">图片先使用尺寸相当小，但是高宽比相同的缩略图替代。
+                                    当页面滚动时候，探测图片是否在视窗中，即图片顶部高于页面底部，并且图片底部低于页面顶部。
+                                    图片进入视窗，就准备一个Image对象，设置其src，去预先加载图片。
+                                    加载完成后，将原图片的src修改，以便从缓存中读取，并设置完成的class，做动画效果。
+                                </span>
+                            </div>
+                        </div>
                 </div>
             </div>
 
@@ -339,6 +354,7 @@
 
     <script src="lib/sticky-event/sticky.js"></script>
     <script src="lib/progress-bar/progress-bar.js"></script>
+    <script src="lib/progressive-image/progressive-image.js"></script>
     <script src="lib/script.js"></script>
 </body>
 
