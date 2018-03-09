@@ -63,7 +63,7 @@ nav {
 }
 
 .section-body {
-    padding-top: 1rem;
+    padding-top: .5rem;
 }
 
 .right {
@@ -76,12 +76,12 @@ nav {
 
 .separate {
     border-bottom: 1px solid darkgray;
-    margin-bottom: .5rem;
+    padding: .5rem 0;
 }
 
 .separate:last-child {
     border-bottom: none;
-    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .label {
