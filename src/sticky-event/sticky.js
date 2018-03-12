@@ -110,12 +110,11 @@
             const parent = target.parentElement,
                 parentInfo = parent.getBoundingClientRect(),
                 parentStyle = getComputedStyle(parent),
-                paddingTop = Number.parseInt(parentStyle['padding-top'].replace('px', '')),
-                paddingBottom = Number.parseInt(parentStyle['padding-bottom'].replace('px', '')),
-                padding = paddingTop + paddingBottom;
+                paddingTop = Number.parseInt(parentStyle['padding-top']),
+                paddingBottom = Number.parseInt(parentStyle['padding-bottom']);
             // 将nav的高度和container的padding算入
             const top = paddingTop - parentInfo.top,
-                bottom = parentInfo.bottom - target.getBoundingClientRect().height - padding,
+                bottom = parentInfo.bottom - target.getBoundingClientRect().height - (paddingTop + paddingBottom),
                 position = top > 10 ? top : 10;
 
             if (bottom > 0) {
