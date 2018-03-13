@@ -2,6 +2,7 @@
 (function () {
   'use strict';
 
+  // 初始图片大小
   /* function initSize() {
     var item,
       itemInfo;
@@ -57,6 +58,7 @@
       // 从缓存中去读取
       requestAnimationFrame(function () {
         item.src = href;
+        item.classList.remove('preview');
         item.classList.add('reveal');
       });
     }
