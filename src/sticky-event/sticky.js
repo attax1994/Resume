@@ -184,13 +184,16 @@
      */
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
-    window.addEventListener('scroll', function () {
+    let throttledCheck = function () {
         ckeckStickyChange(container);
         adjustStickyTarget();
         /* throttler = throttler || setTimeout(() => {
             throttler = null;
         }, 10); */
-    });
+    };
+
+    window.addEventListener('scroll', throttledCheck, false);
+    window.addEventListener('resize', throttledCheck, false)
 
     window.scrollToHeader = scrollToHeader;
 
