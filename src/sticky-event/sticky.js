@@ -182,19 +182,14 @@
     /**
      * 3. 注册事件监听器
      */
-
     // throttler控制触发间隔，暂定为60fps
     let throttler = null;
     window.addEventListener('scroll', function () {
         ckeckStickyChange(container);
         adjustStickyTarget();
-
-        /* if (!throttler) {
-        
-            throttler = setTimeout(() => {
-                throttler = null;
-            }, 10);
-        } */
+        /* throttler = throttler || setTimeout(() => {
+            throttler = null;
+        }, 10); */
     });
 
     window.scrollToHeader = scrollToHeader;
