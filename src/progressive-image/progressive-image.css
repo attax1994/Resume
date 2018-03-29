@@ -1,6 +1,5 @@
 /* progressive image CSS */
 .progressive {
-    display: block;
     overflow: hidden;
     outline: none;
 }
