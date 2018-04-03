@@ -3,106 +3,114 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Accessibility Testing Result</title>
+  <title>Accessibility Test Result</title>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/table.css">
+
   <script src="../lib/knockout-min.js"></script>
-  <script src="./report.js"></script>
-  <script src="../js/fetch.js"></script>
+  <script src="../lib/polyfill.js"></script>
 </head>
 
 <body>
 <div class="page-wrapper">
-  <div class="menu-wrapper">
-    <div>
-      <ul class="menu">
-        <li>
-          <span class="menu-title"
-                data-bind="click: window.switchType.bind($data,'violations',-1), style: { color: viewModel.typeIndex()===-1&&viewModel.currentType()==='violations'? 'blue':'black'}">Violations: </span>
-          <span style="float:right"></span>
-          <ul data-bind="foreach: source().violations">
-            <li>
-              <a class="menu-link"
-                 data-bind="click: window.switchType.bind($data,'violations',$index()), style: { color: viewModel.typeIndex()===$index()&&viewModel.currentType()==='violations'? 'blue': 'black'}">
-                <span data-bind="text:id"></span>
-              </a>
-              <span style="float:right" data-bind="text:value.length"></span>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <span class="menu-title"
-                data-bind="click: window.switchType.bind($data,'incomplete',-1), style: { color: viewModel.typeIndex()===-1&&viewModel.currentType()==='incomplete'? 'blue':'black'}">Incomplete(Needs review): </span>
-          <span style="float:right"></span>
-          <ul data-bind="foreach: source().incomplete">
-            <li>
-              <a class="menu-link"
-                 data-bind="click: window.switchType.bind($data,'incomplete',$index()), style: { color: viewModel.typeIndex()===$index()&&viewModel.currentType()==='incomplete'? 'blue': 'black'}">
-                <span data-bind="text:id"></span>
-              </a>
-              <span style="float:right" data-bind="text:value.length"></span>
-            </li>
-          </ul>
-        </li>
-      </ul>
+  <div class="menu-wrapper stuck">
+
+    <div class="menu">
+      <div class="title"
+           data-bind="click: window.switchType.bind($data,'violations',-1), style: { backgroundColor: viewModel.typeIndex()===-1&&viewModel.currentType()==='violations'? '#039be5':'rgb(45, 50, 62)'}">
+        Violations:
+      </div>
+      <div class="body" data-bind="foreach: source().violations">
+        <div class="item"
+             data-bind="click: window.switchType.bind($data,'violations',$index()), style: { backgroundColor: viewModel.typeIndex()===$index()&&viewModel.currentType()==='violations'? '#039be5':'rgb(45, 50, 62)'}">
+          <span class="link" data-bind="text:id"></span>
+          <span style="float:right" data-bind="text:value.length"></span>
+        </div>
+      </div>
     </div>
+
+    <div class="menu">
+      <div class="title"
+           data-bind="click: window.switchType.bind($data,'incomplete',-1), style: { backgroundColor: viewModel.typeIndex()===-1&&viewModel.currentType()==='incomplete'? '#039be5':'rgb(45, 50, 62)'}">
+        Incomplete:
+      </div>
+      <div class="body" data-bind="foreach: source().incomplete">
+        <div class="item"
+             data-bind="click: window.switchType.bind($data,'incomplete',$index()), style: { backgroundColor: viewModel.typeIndex()===$index()&&viewModel.currentType()==='incomplete'? '#039be5':'rgb(45, 50, 62)'}">
+          <span class="link" data-bind="text:id"></span>
+          <span style="float:right" data-bind="text:value.length"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-switch" data-bind="click: window.toggleMenu">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
   </div>
 
+
   <div class="table-card-wrapper">
-    <h1>Accessibility Testing Result</h1>
-    <div class="file-wrapper">
-      <h3>
-        <span>Url:&nbsp;</span>
-        <span>
+    <h1>Accessibility Test Result</h1>
+    <h3>
+      <span>Url:&nbsp;</span>
+      <span>
             <a target="_blank" data-bind="attr:{href:url},text:url"></a>
           </span>
-      </h3>
-      <div data-bind="foreach: results">
-        <div style="margin-bottom: 4em;">
-          <h3>
-            <span>Description:&nbsp;</span>
-            <span data-bind="text: value[0].violationType"></span>
-          </h3>
+    </h3>
 
-          <div class="table-wrapper" data-bind="foreach: value">
+    <div class="table-list" data-bind="foreach: results">
+      <div style="margin-bottom: 4em;">
+        <h3>
+          <span>Description:&nbsp;</span>
+          <span data-bind="text: value[0].violationType"></span>
+        </h3>
 
-            <div class="table-body">
-              <div class="table-row">
-                <div class="item-title">Impact</div>
-                <div class="item-content short-content"
-                     data-bind="text:impact,css: { serious: impact==='serious', critical: impact==='critical'}"></div>
-                <div class="item-title">Help</div>
-                <div class="item-content short-content">
-                  <a target="_blank" data-bind="attr:{href:helpUrl}">Get Help</a>
-                </div>
-                <div class="item-title">DOM Element</div>
-                <div class="item-content" data-bind="text:DOMElement"></div>
-                <div class="item-title">Xpath</div>
-                <div class="item-content" data-bind="text:Xpath"></div>
+        <div class="table-wrapper" data-bind="foreach: value">
+
+          <div class="table-body">
+            <div class="table-row">
+              <div class="item-title">Impact</div>
+              <div class="item-content short-content"
+                   data-bind="text:impact,css: { serious: impact==='serious', critical: impact==='critical'}"></div>
+              <div class="item-title">Help</div>
+              <div class="item-content short-content">
+                <a target="_blank" data-bind="attr:{href:helpUrl}">Get Help</a>
               </div>
+              <div class="item-title">DOM Element</div>
+              <div class="item-content" data-bind="text:DOMElement"></div>
+              <div class="item-title">Xpath</div>
+              <div class="item-content" data-bind="text:Xpath"></div>
+            </div>
 
-              <div class="table-row">
-                <div class="item-title">Message</div>
-                <div class="item-content long-content" data-bind="foreach:message">
-                  <div data-bind="text: $data" style="margin-bottom: 0.25em;width: 100%;"></div>
-                </div>
-              </div>
-
-              <div class="table-row">
-                <div class="item-title">HTML Element</div>
-                <div class="item-content long-content" data-bind="text:HTML"></div>
+            <div class="table-row">
+              <div class="item-title">Message</div>
+              <div class="item-content long-content" data-bind="foreach:message">
+                <div data-bind="text: $data" style="margin-bottom: 0.25em;width: 100%;"></div>
               </div>
             </div>
 
+            <div class="table-row">
+              <div class="item-title">HTML Element</div>
+              <div class="item-content long-content" data-bind="text:HTML"></div>
+            </div>
           </div>
 
         </div>
+
       </div>
     </div>
   </div>
 </div>
+
+<script src="./report.js"></script>
+<script src="../js/fetch.js"></script>
 </body>
 </html>
